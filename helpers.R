@@ -1,4 +1,4 @@
-make_blobs <- function(n, centers, min, max, sd, n_features, seed) {
+make_blobs <- function(n, centers, min, max, var, n_features, seed) {
   
   set.seed(seed)
   
@@ -7,7 +7,7 @@ make_blobs <- function(n, centers, min, max, sd, n_features, seed) {
   
   # generate blobs
   data_points <- dplyr::bind_rows(lapply(1:centers, function(x) {
-    center_dat <- as.data.frame(mvrnorm(as.integer(n / centers), center_points[x, ], diag(n_features) * sd))
+    center_dat <- as.data.frame(mvrnorm(as.integer(n / centers), center_points[x, ], diag(n_features) * var))
     center_dat['y'] <- x
     center_dat
   }))
